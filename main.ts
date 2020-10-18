@@ -3,6 +3,7 @@ namespace SpriteKind {
     export const gun = SpriteKind.create()
     export const pickup = SpriteKind.create()
     export const enemy2 = SpriteKind.create()
+    export const node = SpriteKind.create()
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     direction = 1
@@ -191,7 +192,7 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
         if (!(enemys_killed + 1 == enemy_quota)) {
             enemys_killed += 1
         } else {
-            game.splash("new wave")
+            game.splash("new wave", subtext)
             enemy_quota = wave * 10
             wave += 1
             enemys_killed = 0
@@ -216,6 +217,7 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
 })
 let no_no_square = 0
 let enemy_spawn = 0
+let subtext = ""
 let projectile4: Sprite = null
 let projectile3: Sprite = null
 let projectile2: Sprite = null
@@ -556,7 +558,26 @@ tiles.loadMap(tiles.createMap(tiles.createTilemap(hex`10001000000000000000000000
 enemy_quota = 10
 wave = 1
 tiles.coverAllTiles(myTiles.transparency16, myTiles.tile1)
+let mySprite7 = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . f f f f f . . . . . 
+    . . . . . . f f f f f . . . . . 
+    . . . . . . f f f f f . . . . . 
+    . . . . . . f f f f f . . . . . 
+    . . . . . . f f f f f . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, SpriteKind.node)
 forever(function () {
+    subtext = convertToText(wave + 1)
     if (!(mySprite.overlapsWith(mySprite4)) || (!(mySprite.overlapsWith(mySprite5)) || !(mySprite.overlapsWith(mySprite5))) || !(mySprite.overlapsWith(mySprite3))) {
         no_no_square = 4
     }
