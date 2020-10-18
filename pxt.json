@@ -17,7 +17,8 @@
         "palette": "*",
         "pxt-status-bar": "github:jwunderl/pxt-status-bar#v0.3.1",
         "settings-blocks": "github:microsoft/pxt-settings-blocks#v1.0.0",
-        "Sprite Grid": "github:microsoft/arcade-grid#v1.2.2"
+        "Sprite Grid": "github:microsoft/arcade-grid#v1.2.2",
+        "Timers": "github:microsoft/arcade-timers#v1.1.0"
     },
     "files": [
         "main.blocks",
