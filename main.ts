@@ -233,35 +233,11 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
     if (weapon == 2) {
-        if (!(mySprite.overlapsWith(mySprite9))) {
-            star_out = 2
-            mySprite9 = sprites.create(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . 1 . . . . . . . . 
-                . . . . . . . 1 1 . . . . . . . 
-                . . . . . . 1 1 1 1 . . . . . . 
-                . . . . 1 1 1 . . 1 1 1 . . . . 
-                . . . . . 1 1 . . 1 1 . . . . . 
-                . . . . . . 1 1 1 1 . . . . . . 
-                . . . . . . . 1 1 . . . . . . . 
-                . . . . . . . 1 . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, SpriteKind.Projectile)
-            mySprite9.follow(mySprite2, 100)
-            timer.after(500, function () {
-                mySprite9.follow(mySprite2, 0)
-                mySprite9.setFlag(SpriteFlag.Invisible, true)
-                timer.after(25, function () {
-                    mySprite9.follow(mySprite, 500)
-                })
-            })
-        }
+        mySprite9.follow(mySprite2, 100)
+        timer.after(500, function () {
+            mySprite9.setPosition(mySprite.x, mySprite.x)
+            mySprite9.follow(mySprite2, 0)
+        })
     }
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -367,8 +343,6 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
 let no_no_square = 0
 let enemy_spawn = 0
 let subtext = ""
-let star_out = 0
-let mySprite9: Sprite = null
 let projectile5: Sprite = null
 let projectile4: Sprite = null
 let projectile3: Sprite = null
@@ -376,6 +350,7 @@ let projectile2: Sprite = null
 let projectile: Sprite = null
 let weapon = 0
 let direction = 0
+let mySprite9: Sprite = null
 let wave = 0
 let enemy_quota = 0
 let mySprite: Sprite = null
@@ -756,8 +731,8 @@ let mySprite10 = sprites.create(img`
     . . . . . . . . 1 . . . . . . . 
     . . . . . . . 1 1 . . . . . . . 
     . . . . . . 1 1 1 1 . . . . . . 
-    . . . . 1 1 1 . . 1 1 1 . . . . 
-    . . . . . 1 1 . . 1 1 . . . . . 
+    . . . . 1 1 1 . . 1 1 . . . . . 
+    . . . . . 1 1 . . 1 1 1 . . . . 
     . . . . . . 1 1 1 1 . . . . . . 
     . . . . . . . 1 1 . . . . . . . 
     . . . . . . . 1 . . . . . . . . 
@@ -767,6 +742,24 @@ let mySprite10 = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.pickup)
 mySprite10.setPosition(74, 102)
+mySprite9 = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . 1 . . . . . . . 
+    . . . . . . . 1 1 . . . . . . . 
+    . . . . . . 1 1 1 1 . . . . . . 
+    . . . . 1 1 1 . . 1 1 . . . . . 
+    . . . . . 1 1 . . 1 1 1 . . . . 
+    . . . . . . 1 1 1 1 . . . . . . 
+    . . . . . . . 1 1 . . . . . . . 
+    . . . . . . . 1 . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, SpriteKind.Projectile)
 forever(function () {
     subtext = convertToText(wave + 1)
     if (!(mySprite.overlapsWith(mySprite4)) || (!(mySprite.overlapsWith(mySprite5)) || !(mySprite.overlapsWith(mySprite5))) || !(mySprite.overlapsWith(mySprite3))) {
